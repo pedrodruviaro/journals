@@ -4,8 +4,8 @@ import Button from 'primevue/button'
 
 <template>
   <div class="flex flex-col gap-2 items-start">
-    <Button class="w-full text-left" label="Personal" severity="contrast" outlined />
-    <Button class="w-full text-left" label="Work" severity="secondary" outlined />
-    <Button class="w-full text-left" label="Misc" severity="secondary" outlined />
+    <Button class="w-full text-left" label="Pessoal" severity="contrast" outlined />
+    <Button class="w-full text-left" label="Trabalho" severity="secondary" outlined />
+    <Button class="w-full text-left" label="Todos" severity="secondary" outlined />
   </div>
 </template>
