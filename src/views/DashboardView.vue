@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AdminHeader from '@/components/AdminHeader.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
 import DasboardButtons from '@/components/DashboardButtons/DasboardButtons.vue'
 import DasboardButtonsLoader from '@/components/DashboardButtons/DasboardButtonsLoader.vue'
 import DashboardJournals from '@/components/DashboardJournals/DashboardJournals.vue'
@@ -18,9 +18,8 @@ function handleWantsCreateNewJournal() {
 </script>
 
 <template>
-  <div>
-    <AdminHeader />
-    <section class="container py-10 lg:py-16">
+  <AdminLayout>
+    <section>
       <div class="grid md:grid-cols-[1fr_5fr] items-start gap-8">
         <DasboardButtonsLoader :loading="loading">
           <DasboardButtons />
@@ -33,5 +32,5 @@ function handleWantsCreateNewJournal() {
 
       <DashboardButtonNewJournal @wants-to-create-new-journal="handleWantsCreateNewJournal" />
     </section>
-  </div>
+  </AdminLayout>
 </template>
