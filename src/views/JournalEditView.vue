@@ -25,6 +25,8 @@ function handleSave() {
 
 <template>
   <AdminLayout>
+    <h1 class="font-bold mb-4 text-2xl lg:text-3xl">Continue seu jornal!</h1>
+
     <EditorFormLoader :loading="loading">
       <EditorForm
         v-model:title="title"
