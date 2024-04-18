@@ -9,12 +9,15 @@ import type { MenuItem } from 'primevue/menuitem'
 
 const props = defineProps<{
   avatarUrl: string
+  username: string
+  loading: boolean
 }>()
 
 const emits = defineEmits<{
   (e: 'wants-to-navigate-to-journals'): void
   (e: 'wants-to-create-journal'): void
   (e: 'wants-to-see-public-profile'): void
+  (e: 'wants-to-logout'): void
 }>()
 
 const menuItems = ref<MenuItem[]>([
@@ -36,12 +39,12 @@ const isSidebarVisible = ref(false)
 
 <template>
   <header class="shadow-sm py-2.5">
-    <div class="container flex items-center justify-between gap-2">
+    <div class="container flex items-center flex-wrap justify-between gap-2">
       <BaseLogo />
 
       <div class="flex items-center gap-2">
+        <span class="font-semibold text-xl">{{ props.username }}</span>
         <Avatar :image="props.avatarUrl" class="mr-2" shape="circle" size="large" />
-
         <Button
           icon="pi pi-bars"
           aria-label="Submit"
@@ -54,7 +57,15 @@ const isSidebarVisible = ref(false)
   <Sidebar v-model:visible="isSidebarVisible" header="Menu" position="right">
     <div class="h-full flex flex-col justify-between">
       <Menu :model="menuItems" />
-      <Button icon="pi pi-sign-out" icon-pos="right" label="Sair" severity="secondary" outlined />
+      <Button
+        icon="pi pi-sign-out"
+        icon-pos="right"
+        label="Sair"
+        severity="secondary"
+        outlined
+        :loading="props.loading"
+        @click="emits('wants-to-logout')"
+      />
     </div>
   </Sidebar>
 </template>
