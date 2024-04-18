@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import LoginView from '@/views/LoginView.vue'
+import AuthLoginView from '@/views/AuthLoginView.vue'
 import JournalsDashboardView from '@/views/JournalsDashboardView.vue'
+import AuthRedirectView from '@/views/AuthRedirectView.vue'
 import EditorView from '@/views/EditorView.vue'
 import JournalCreateView from '@/views/JournalCreateView.vue'
 import JournalEditView from '@/views/JournalEditView.vue'
@@ -14,11 +15,25 @@ const router = createRouter({
       name: 'landing-page',
       component: HomeView
     },
+
     {
-      path: '/login',
-      name: 'login',
-      component: LoginView
+      path: '/auth',
+      name: 'auth',
+      redirect: { name: 'auth-login' },
+      children: [
+        {
+          path: 'login',
+          name: 'auth-login',
+          component: AuthLoginView
+        },
+        {
+          path: 'redirect',
+          name: 'auth-redirect',
+          component: AuthRedirectView
+        }
+      ]
     },
+
     {
       path: '/journals',
       name: 'journals',

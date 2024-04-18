@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseLogo from '@/components/BaseLogo.vue'
 import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
 import Menu from 'primevue/menu'
@@ -36,7 +37,7 @@ const isSidebarVisible = ref(false)
 <template>
   <header class="shadow-sm py-2.5">
     <div class="container flex items-center justify-between gap-2">
-      <span class="font-black text-3xl lg:text-4xl">Journals</span>
+      <BaseLogo />
 
       <div class="flex items-center gap-2">
         <Avatar :image="props.avatarUrl" class="mr-2" shape="circle" size="large" />

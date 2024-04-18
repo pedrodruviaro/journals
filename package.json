@@ -13,11 +13,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "firebase": "^10.11.0",
     "primeicons": "^7.0.0",
     "primevue": "^3.51.0",
     "quill": "^2.0.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vuefire": "^3.1.23"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

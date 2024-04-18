@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AdminHeader from '@/components/AdminHeader.vue'
+import BasePageWrapper from '@/components/BasePageWrapper.vue'
 import { useRouter } from 'vue-router'
 
 // @TODO - avatar url prop to header
@@ -27,8 +28,8 @@ function handleNavigateToPublicProfile() {
       @wants-to-create-journal="handleNavigateToCreateJournal"
       @wants-to-see-public-profile="handleNavigateToPublicProfile"
     />
-    <main class="container py-10 lg:py-16">
+    <BasePageWrapper>
       <slot />
-    </main>
+    </BasePageWrapper>
   </div>
 </template>
