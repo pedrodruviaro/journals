@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AdminLayout from '@/layouts/AdminLayout.vue'
-import DasboardButtons from '@/components/Dashboard/DashboardButtons/DasboardButtons.vue'
-import DasboardButtonsLoader from '@/components/Dashboard/DashboardButtons/DasboardButtonsLoader.vue'
+import DasboardButtons from '@/components/Dashboard/DashboardButtons/Buttons.vue'
+import DasboardButtonsLoader from '@/components/Dashboard/DashboardButtons/Loader.vue'
 import DashboardJournalsGroup from '@/components/Dashboard/DashboardJournals/Group.vue'
 import DashboardJournalsCard from '@/components/Dashboard/DashboardJournals/Card.vue'
 import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/Loader.vue'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AdminLayout from '@/layouts/AdminLayout.vue'
-import EditorForm from '@/components/Editor/EditorForm/EditorForm.vue'
-import EditorFormLoader from '@/components/Editor/EditorForm/EditorFormLoader.vue'
+import EditorForm from '@/components/Editor/Form.vue'
+import EditorFormLoader from '@/components/Editor/Loader.vue'
 import { ref } from 'vue'
 import { Category } from '@/constants/category'
 
