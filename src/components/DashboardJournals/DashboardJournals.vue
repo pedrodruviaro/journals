@@ -25,7 +25,15 @@ import Chip from 'primevue/chip'
         tabindex="0"
         @keyup.enter="() => console.log(i)"
       >
-        <template #title>My journal {{ i }}</template>
+        <template #title>
+          <div class="grid gap-4 md:flex md:items-center md:justify-between">
+            <h2>My journal {{ i }}</h2>
+            <p class="text-sm flex items-center justify-between gap-2 max-w-max">
+              <span>Privado</span>
+              <i class="pi pi-lock"></i>
+            </p>
+          </div>
+        </template>
         <template #content>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, saepe? Eius unde
