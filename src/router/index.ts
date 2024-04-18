@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AuthLoginView from '@/views/AuthLoginView.vue'
-import JournalsDashboardView from '@/views/JournalsDashboardView.vue'
-import AuthRedirectView from '@/views/AuthRedirectView.vue'
-import EditorView from '@/views/EditorView.vue'
-import JournalCreateView from '@/views/JournalCreateView.vue'
-import JournalEditView from '@/views/JournalEditView.vue'
+import LandingPageView from '@/views/LandinPage/LandingPgeView.vue'
+import AuthLoginView from '@/views/Auth/AuthLoginView.vue'
+import DashboardView from '@/views/Dashboard/DashboardView.vue'
+import AuthRedirectView from '@/views/Auth/AuthRedirectView.vue'
+import EditorView from '@/views/Editor/EditorView.vue'
+import EditorCreateView from '@/views/Editor/EditorCreateView.vue'
+import EditorEditView from '@/views/Editor/EditorEditView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +13,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'landing-page',
-      component: HomeView
+      component: LandingPageView
     },
 
     {
@@ -37,7 +37,7 @@ const router = createRouter({
     {
       path: '/journals',
       name: 'journals',
-      component: JournalsDashboardView
+      component: DashboardView
     },
     {
       path: '/editor',
@@ -48,12 +48,12 @@ const router = createRouter({
         {
           path: 'create',
           name: 'editor-create',
-          component: JournalCreateView
+          component: EditorCreateView
         },
         {
           path: 'edit',
           name: 'editor-edit',
-          component: JournalEditView
+          component: EditorEditView
         }
       ]
     }
