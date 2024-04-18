@@ -3,12 +3,13 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 import EditorForm from '@/components/Editor/EditorForm/EditorForm.vue'
 import EditorFormLoader from '@/components/Editor/EditorForm/EditorFormLoader.vue'
 import { ref } from 'vue'
+import { Category } from '@/constants/category'
 
 const loading = ref(false)
 
 const title = ref('')
 const description = ref('')
-const selectedCategory = ref('')
+const selectedCategory = ref<Category>(Category.PERSONAL)
 const isPublic = ref(false)
 const content = ref('')
 

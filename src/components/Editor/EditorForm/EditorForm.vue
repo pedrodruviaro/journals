@@ -5,14 +5,10 @@ import Editor from 'primevue/editor'
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import ToggleButton from 'primevue/togglebutton'
-
-const categories = [
-  { name: 'Work', value: 'work' },
-  { name: 'Personal', value: 'personal' }
-]
+import { Category, CATEGORY_VALUES } from '@/constants/category'
 
 const title = defineModel<string>('title', { required: true })
-const category = defineModel<string>('category', { required: true })
+const category = defineModel<Category>('category', { required: true })
 const description = defineModel<string>('description', { required: true })
 const content = defineModel<string>('content', { required: true })
 const isPublic = defineModel<boolean>('isPublic', { required: true })
@@ -28,8 +24,7 @@ const emits = defineEmits<{
       <InputText type="text" placeholder="Título" v-model="title" class="flex-1" />
       <Dropdown
         v-model="category"
-        :options="categories"
-        optionLabel="name"
+        :options="CATEGORY_VALUES"
         placeholder="Categoria"
         class="w-40"
       />

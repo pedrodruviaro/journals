@@ -2,18 +2,23 @@
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import DasboardButtons from '@/components/Dashboard/DashboardButtons/DasboardButtons.vue'
 import DasboardButtonsLoader from '@/components/Dashboard/DashboardButtons/DasboardButtonsLoader.vue'
-import DashboardJournals from '@/components/Dashboard/DashboardJournals/DashboardJournals.vue'
-import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/DashboardJournalsLoader.vue'
+import DashboardJournalsGroup from '@/components/Dashboard/DashboardJournals/Group.vue'
+import DashboardJournalsCard from '@/components/Dashboard/DashboardJournals/Card.vue'
+import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/Loader.vue'
 import DashboardButtonNewJournal from '@/components/Dashboard/DashboardButtonNewJournal.vue'
 import { useRouter } from 'vue-router'
+import { useJournals } from '@/composables/journals/useJournals'
 
-// @TODO - remove this placeholder code
-import { ref } from 'vue'
-const loading = ref(false)
+const { loading, journals } = useJournals()
 
 const router = useRouter()
 function handleWantsCreateNewJournal() {
   router.push('/journals/new')
+}
+
+function handleWantsToEdit(id: string) {
+  //@TODO - change this logic after router is finished
+  router.push(`/editor/edit?id=${id}`)
 }
 </script>
 
@@ -26,7 +31,14 @@ function handleWantsCreateNewJournal() {
         </DasboardButtonsLoader>
 
         <DashboardJournalsLoader :loading="loading">
-          <DashboardJournals />
+          <DashboardJournalsGroup>
+            <DashboardJournalsCard
+              v-for="journal in journals"
+              :key="journal.id"
+              :journal="journal"
+              @wants-to-edit-journal="handleWantsToEdit"
+            />
+          </DashboardJournalsGroup>
         </DashboardJournalsLoader>
       </div>
 
