@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AdminLayout from '@/layouts/AdminLayout.vue'
-import EditorForm from '@/components/EditorForm/EditorForm.vue'
-import EditorFormLoader from '@/components/EditorForm/EditorFormLoader.vue'
+import EditorForm from '@/components/Editor/EditorForm/EditorForm.vue'
+import EditorFormLoader from '@/components/Editor/EditorForm/EditorFormLoader.vue'
 import { ref } from 'vue'
 
 const loading = ref(false)

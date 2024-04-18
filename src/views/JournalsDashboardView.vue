@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import AdminLayout from '@/layouts/AdminLayout.vue'
-import DasboardButtons from '@/components/DashboardButtons/DasboardButtons.vue'
-import DasboardButtonsLoader from '@/components/DashboardButtons/DasboardButtonsLoader.vue'
-import DashboardJournals from '@/components/DashboardJournals/DashboardJournals.vue'
-import DashboardJournalsLoader from '@/components/DashboardJournals/DashboardJournalsLoader.vue'
-import DashboardButtonNewJournal from '@/components/DashboardButtonNewJournal.vue'
+import DasboardButtons from '@/components/Dashboard/DashboardButtons/DasboardButtons.vue'
+import DasboardButtonsLoader from '@/components/Dashboard/DashboardButtons/DasboardButtonsLoader.vue'
+import DashboardJournals from '@/components/Dashboard/DashboardJournals/DashboardJournals.vue'
+import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/DashboardJournalsLoader.vue'
+import DashboardButtonNewJournal from '@/components/Dashboard/DashboardButtonNewJournal.vue'
 import { useRouter } from 'vue-router'
 
 // @TODO - remove this placeholder code

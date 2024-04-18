@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AdminHeader from '@/components/AdminHeader.vue'
-import BasePageWrapper from '@/components/BasePageWrapper.vue'
+import AdminHeader from '@/components/Admin/AdminHeader.vue'
+import BasePageWrapper from '@/components/Base/BasePageWrapper.vue'
 import { useRouter } from 'vue-router'
 
 // @TODO - avatar url prop to header

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseLogo from '@/components/BaseLogo.vue'
+import BaseLogo from '@/components/Base/BaseLogo.vue'
 import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
 import Menu from 'primevue/menu'

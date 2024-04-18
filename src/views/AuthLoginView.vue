@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BasePageWrapper from '@/components/BasePageWrapper.vue'
-import AuthLogin from '@/components/AuthLogin.vue'
+import BasePageWrapper from '@/components/Base/BasePageWrapper.vue'
+import AuthLogin from '@/components/Auth/AuthLogin.vue'
 
 import { ref } from 'vue'
 
