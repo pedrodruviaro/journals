@@ -4,14 +4,30 @@ import Button from 'primevue/button'
 import Menu from 'primevue/menu'
 import Sidebar from 'primevue/sidebar'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import type { MenuItem } from 'primevue/menuitem'
 
-const router = useRouter()
+const props = defineProps<{
+  avatarUrl: string
+}>()
 
-const menuItems = ref([
-  { label: 'Journals', icon: 'pi pi-book', command: () => router.push({ name: 'dashboard' }) },
-  { label: 'Criar novo', icon: 'pi pi-plus', command: () => router.push({ name: 'dashboard' }) },
-  { label: 'Perfil Público', icon: 'pi pi-user', command: () => router.push({ name: 'dashboard' }) }
+const emits = defineEmits<{
+  (e: 'wants-to-navigate-to-journals'): void
+  (e: 'wants-to-create-journal'): void
+  (e: 'wants-to-see-public-profile'): void
+}>()
+
+const menuItems = ref<MenuItem[]>([
+  { label: 'Journals', icon: 'pi pi-book', command: () => emits('wants-to-create-journal') },
+  {
+    label: 'Criar novo',
+    icon: 'pi pi-plus',
+    command: () => emits('wants-to-create-journal')
+  },
+  {
+    label: 'Perfil Público',
+    icon: 'pi pi-user',
+    command: () => emits('wants-to-see-public-profile')
+  }
 ])
 
 const isSidebarVisible = ref(false)
@@ -23,12 +39,7 @@ const isSidebarVisible = ref(false)
       <span class="font-black text-3xl lg:text-4xl">Journals</span>
 
       <div class="flex items-center gap-2">
-        <Avatar
-          image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-          class="mr-2"
-          shape="circle"
-          size="large"
-        />
+        <Avatar :image="props.avatarUrl" class="mr-2" shape="circle" size="large" />
 
         <Button
           icon="pi pi-bars"

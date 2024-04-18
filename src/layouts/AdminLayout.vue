@@ -1,10 +1,32 @@
 <script setup lang="ts">
 import AdminHeader from '@/components/AdminHeader.vue'
+import { useRouter } from 'vue-router'
+
+// @TODO - avatar url prop to header
+
+const router = useRouter()
+
+function handleNavigateToJournals() {
+  router.push({ name: 'journals' })
+}
+
+function handleNavigateToCreateJournal() {
+  router.push({ name: 'editor-create' })
+}
+
+function handleNavigateToPublicProfile() {
+  router.push({ name: 'public-profile' })
+}
 </script>
 
 <template>
   <div>
-    <AdminHeader />
+    <AdminHeader
+      avatar-url="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+      @wants-to-navigate-to-journals="handleNavigateToJournals"
+      @wants-to-create-journal="handleNavigateToCreateJournal"
+      @wants-to-see-public-profile="handleNavigateToPublicProfile"
+    />
     <main class="container py-10 lg:py-16">
       <slot />
     </main>
