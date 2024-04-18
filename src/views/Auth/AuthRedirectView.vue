@@ -6,11 +6,12 @@ import { onMounted } from 'vue'
 
 const router = useRouter()
 
-onMounted(() => {
-  setTimeout(() => {
-    router.push({ name: 'journals' })
-  }, 1500)
-})
+async function navigateToDashboard() {
+  await new Promise((resolve) => setTimeout(resolve, 1_750))
+  router.push({ name: 'journals' })
+}
+
+onMounted(async () => await navigateToDashboard())
 </script>
 
 <template>
