@@ -58,8 +58,9 @@ const router = createRouter({
           component: EditorCreateView
         },
         {
-          path: 'edit',
+          path: 'edit/:id',
           name: 'editor-edit',
+          props: true,
           component: EditorEditView
         }
       ]

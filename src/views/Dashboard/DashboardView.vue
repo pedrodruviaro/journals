@@ -8,8 +8,10 @@ import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/Lo
 import DashboardButtonNewJournal from '@/components/Dashboard/DashboardButtonNewJournal.vue'
 import { useRouter } from 'vue-router'
 import { useJournals } from '@/composables/journals/useJournals'
+import { useCurrentUser } from 'vuefire'
 
-const { loading, journals } = useJournals()
+const user = useCurrentUser()
+const { loading, journals } = useJournals({ userId: user.value?.uid! })
 
 const router = useRouter()
 function handleWantsCreateNewJournal() {
@@ -18,7 +20,7 @@ function handleWantsCreateNewJournal() {
 
 function handleWantsToEdit(id: string) {
   //@TODO - change this logic after router is finished
-  router.push(`/editor/edit?id=${id}`)
+  router.push({ name: 'editor-edit', params: { id } })
 }
 </script>
 

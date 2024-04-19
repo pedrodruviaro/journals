@@ -26,7 +26,7 @@ export function useAuthActions() {
     } catch (error) {
       toast.add({
         severity: 'error',
-        detail: 'Failed to login... refresh and try again',
+        detail: 'Falha no login. Recarregue e tente novamente',
         life: 2000
       })
     } finally {
@@ -50,7 +50,7 @@ export function useAuthActions() {
     } catch (error) {
       toast.add({
         severity: 'error',
-        detail: 'Failed to logout... refresh and try again',
+        detail: 'Falha no logout. Recarregue e tente novamente',
         life: 2000
       })
     } finally {

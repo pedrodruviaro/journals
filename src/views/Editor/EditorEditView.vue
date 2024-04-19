@@ -2,40 +2,56 @@
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import EditorForm from '@/components/Editor/Form.vue'
 import EditorFormLoader from '@/components/Editor/Loader.vue'
-import { ref } from 'vue'
-import { Category } from '@/constants/category'
+import { useCurrentUser } from 'vuefire'
+import { useMyJournal } from '@/composables/journals/useMyJournal'
+import { useJournalUpdate } from '@/composables/journals/useJournalUpdate'
 
-const loading = ref(false)
+const props = defineProps<{
+  id: string
+}>()
 
-const title = ref('')
-const description = ref('')
-const selectedCategory = ref<Category>(Category.PERSONAL)
-const isPublic = ref(false)
-const content = ref('')
+const user = useCurrentUser()
 
-function handleSave() {
-  console.log({
-    title: title.value,
-    category: selectedCategory.value,
-    description: description.value,
-    content: content.value,
-    isPublic: isPublic.value
-  })
+const {
+  loading: loadingJournal,
+  journal,
+  error
+} = useMyJournal({
+  userId: user.value?.uid!,
+  journalId: props.id
+})
+
+const {
+  loading: loadingUpdate,
+  journalValues,
+  errors,
+  updateJournal,
+  safeParse
+} = useJournalUpdate({ journal, id: props.id })
+
+async function handleUpdate() {
+  const isValid = safeParse().success
+
+  if (!isValid) return
+
+  await updateJournal()
 }
 </script>
 
 <template>
   <AdminLayout>
-    <h1 class="font-bold mb-4 text-2xl lg:text-3xl">Continue seu jornal!</h1>
-    <EditorFormLoader :loading="loading">
+    <EditorFormLoader :loading="loadingJournal">
       <EditorForm
-        v-model:title="title"
-        v-model:category="selectedCategory"
-        v-model:description="description"
-        v-model:content="content"
-        v-model:isPublic="isPublic"
-        @tried-to-submit="handleSave"
+        v-if="!error && journal"
+        v-model:journal="journalValues"
+        :loading="loadingUpdate"
+        :errors="errors"
+        @tried-to-submit="handleUpdate"
       />
     </EditorFormLoader>
+
+    <div v-if="error">
+      <h2>Algo deu errado (diferente userId)</h2>
+    </div>
   </AdminLayout>
 </template>

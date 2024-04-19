@@ -3,11 +3,11 @@ import { Category } from '@/constants/category'
 export type Journal = {
   category: Category
   content: string
-  createdAt: string
+  createdAt?: string
   description: string
   isPublic: boolean
   title: string
-  upstringdAt: Date
+  updatedAt?: Date
   userId?: string
   id?: string
 }

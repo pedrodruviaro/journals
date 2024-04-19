@@ -21,7 +21,7 @@ const emits = defineEmits<{
 }>()
 
 const menuItems = ref<MenuItem[]>([
-  { label: 'Journals', icon: 'pi pi-book', command: () => emits('wants-to-create-journal') },
+  { label: 'Journals', icon: 'pi pi-book', command: () => emits('wants-to-navigate-to-journals') },
   {
     label: 'Criar novo',
     icon: 'pi pi-plus',
