@@ -9,6 +9,8 @@ const props = defineProps<{
 }>()
 
 const journalDate = computed(() => {
+  if (!props.journal.createdAt) return ''
+
   const date = new Date(props.journal.createdAt.split('T')[0])
   return Intl.DateTimeFormat('pt-BR').format(date)
 })

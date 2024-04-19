@@ -1,41 +1,27 @@
 <script setup lang="ts">
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import EditorForm from '@/components/Editor/Form.vue'
-import EditorFormLoader from '@/components/Editor/Loader.vue'
-import { ref } from 'vue'
-import { Category } from '@/constants/category'
+import { useJournalCreate } from '@/composables/journals/useJournalCreate'
 
-const loading = ref(false)
+const { errors, loading: loadingCreate, journal, safeParse, createJournal } = useJournalCreate()
 
-const title = ref('')
-const description = ref('')
-const selectedCategory = ref<Category>(Category.PERSONAL)
-const isPublic = ref(false)
-const content = ref('')
+async function handleCreate() {
+  const isValid = safeParse().success
 
-function handleSave() {
-  console.log({
-    title: title.value,
-    category: selectedCategory.value,
-    description: description.value,
-    content: content.value,
-    isPublic: isPublic.value
-  })
+  if (!isValid) return
+
+  await createJournal()
 }
 </script>
 
 <template>
   <AdminLayout>
     <h1 class="font-bold mb-4 text-2xl lg:text-3xl">Crie seu jornal!</h1>
-    <EditorFormLoader :loading="loading">
-      <EditorForm
-        v-model:title="title"
-        v-model:category="selectedCategory"
-        v-model:description="description"
-        v-model:content="content"
-        v-model:isPublic="isPublic"
-        @tried-to-submit="handleSave"
-      />
-    </EditorFormLoader>
+    <EditorForm
+      :loading="loadingCreate"
+      :errors="errors"
+      v-model:journal="journal"
+      @tried-to-submit="handleCreate"
+    />
   </AdminLayout>
 </template>

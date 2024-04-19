@@ -2,7 +2,7 @@ import type { Category } from '@/constants/category'
 import type { Journal } from '@/types'
 import { doc, updateDoc } from 'firebase/firestore'
 import { useToast } from 'primevue/usetoast'
-import { ref, watchEffect, type Ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useFirestore } from 'vuefire'
 import { z, type ZodFormattedError } from 'zod'
 
@@ -14,20 +14,14 @@ const schema = z.object({
   isPublic: z.boolean({ required_error: 'Defina o tipo do jornal' })
 })
 
-interface UseJournalUpdateOptions {
-  journal: Ref<Journal | undefined>
-  id?: string
-}
-
-export function useJournalUpdate({ journal, id }: UseJournalUpdateOptions) {
+export function useJournalCreate() {
   const toast = useToast()
   const db = useFirestore()
 
   const loading = ref(false)
   const errors = ref<ZodFormattedError<Journal>>()
 
-  const journalValues = ref<Journal>({
-    id: '',
+  const journal = ref<Journal>({
     title: '',
     description: '',
     category: '' as Category,
@@ -36,7 +30,7 @@ export function useJournalUpdate({ journal, id }: UseJournalUpdateOptions) {
   })
 
   function safeParse() {
-    const result = schema.safeParse({ ...journalValues.value })
+    const result = schema.safeParse({ ...journal.value })
 
     if (!result.success) {
       errors.value = result.error.format()
@@ -47,15 +41,12 @@ export function useJournalUpdate({ journal, id }: UseJournalUpdateOptions) {
     return result
   }
 
-  async function updateJournal() {
-    if (!journal.value || !id || !safeParse().success) return
-
+  async function createJournal() {
     try {
       loading.value = true
 
-      const docRef = doc(db, 'journals', journalValues.value.id!)
-
-      await updateDoc(docRef, { ...journalValues.value, updatedAt: new Date().toISOString() })
+      // criar
+      console.log(journal.value)
 
       toast.add({
         severity: 'success',
@@ -74,24 +65,11 @@ export function useJournalUpdate({ journal, id }: UseJournalUpdateOptions) {
     }
   }
 
-  watchEffect(() => {
-    if (!journal.value) return
-
-    journalValues.value = {
-      id: id,
-      title: journal.value.title,
-      description: journal.value.description,
-      category: journal.value.category,
-      content: journal.value.content,
-      isPublic: journal.value.isPublic
-    }
-  })
-
   return {
     loading,
     errors,
-    journalValues,
+    journal,
     safeParse,
-    updateJournal
+    createJournal
   }
 }

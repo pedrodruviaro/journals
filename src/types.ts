@@ -7,7 +7,7 @@ export type Journal = {
   description: string
   isPublic: boolean
   title: string
-  updatedAt?: Date
+  updatedAt?: string
   userId?: string
   id?: string
 }
