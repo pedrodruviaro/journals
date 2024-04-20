@@ -40,7 +40,9 @@ const isSidebarVisible = ref(false)
 <template>
   <header class="shadow-sm py-2.5">
     <div class="container flex items-center flex-wrap justify-between gap-2">
-      <BaseLogo />
+      <RouterLink :to="{ name: 'journals' }">
+        <BaseLogo />
+      </RouterLink>
 
       <div class="flex items-center gap-2">
         <span class="font-semibold text-xl">{{ props.username }}</span>

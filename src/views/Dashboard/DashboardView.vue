@@ -15,11 +15,10 @@ const { loading, journals } = useJournals({ userId: user.value?.uid! })
 
 const router = useRouter()
 function handleWantsCreateNewJournal() {
-  router.push('/journals/new')
+  router.push({ name: 'editor-create' })
 }
 
 function handleWantsToEdit(id: string) {
-  //@TODO - change this logic after router is finished
   router.push({ name: 'editor-edit', params: { id } })
 }
 </script>
