@@ -1,15 +1,20 @@
-import type { Category } from '@/constants/category'
-import type { Journal } from '@/types'
-import { doc, updateDoc } from 'firebase/firestore'
+import { z } from 'zod'
 import { useToast } from 'primevue/usetoast'
-import { ref, watchEffect, type Ref } from 'vue'
-import { useFirestore } from 'vuefire'
-import { z, type ZodFormattedError } from 'zod'
+import { ref, watchEffect } from 'vue'
+import { useServices } from '@/composables/services/useServices'
+import { Category } from '@/constants/category'
+import type { ZodFormattedError } from 'zod'
+import type { Journal } from '@/types'
+import type { Ref } from 'vue'
 
 const schema = z.object({
   title: z.string().min(4, 'Um título é obrigatório'),
   description: z.string().min(1, 'Uma descrição é obrigatória'),
-  category: z.string(),
+  category: z.nativeEnum(Category, {
+    errorMap: () => {
+      return { message: 'Defina uma categoria' }
+    }
+  }),
   content: z.string().min(1, 'Defina um conteúdo'),
   isPublic: z.boolean({ required_error: 'Defina o tipo do jornal' })
 })
@@ -21,7 +26,7 @@ interface UseJournalUpdateOptions {
 
 export function useJournalUpdate({ journal, id }: UseJournalUpdateOptions) {
   const toast = useToast()
-  const db = useFirestore()
+  const services = useServices()
 
   const loading = ref(false)
   const errors = ref<ZodFormattedError<Journal>>()
@@ -53,9 +58,7 @@ export function useJournalUpdate({ journal, id }: UseJournalUpdateOptions) {
     try {
       loading.value = true
 
-      const docRef = doc(db, 'journals', journalValues.value.id!)
-
-      await updateDoc(docRef, { ...journalValues.value, updatedAt: new Date().toISOString() })
+      await services.journals.update({ journal: journalValues })
 
       toast.add({
         severity: 'success',

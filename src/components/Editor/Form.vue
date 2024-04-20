@@ -6,7 +6,7 @@ import Textarea from 'primevue/textarea'
 import Tag from 'primevue/tag'
 import ToggleButton from 'primevue/togglebutton'
 import { marked } from 'marked'
-import { CATEGORY_VALUES, Category } from '@/constants/category'
+import { CATEGORY_VALUES } from '@/constants/category'
 import type { Journal } from '@/types'
 import type { ZodFormattedError } from 'zod'
 import { computed } from 'vue'
@@ -21,7 +21,7 @@ const journal = defineModel<Journal>('journal', {
   default: {
     title: '',
     description: '',
-    category: '' as Category,
+    category: '',
     content: '',
     isPublic: false
   }
@@ -45,7 +45,7 @@ const markdownContent = computed(() => {
           props.errors?.title._errors[0]
         }}</small>
       </div>
-      <div>
+      <div class="grid">
         <Dropdown
           v-model="journal.category"
           :options="CATEGORY_VALUES"

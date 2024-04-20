@@ -1,8 +1,7 @@
 import { onMounted, ref } from 'vue'
 import type { Journal } from '@/types'
-import { useFirestore } from 'vuefire'
-import { collection, query, where, getDocs } from 'firebase/firestore'
 import { useToast } from 'primevue/usetoast'
+import { useServices } from '@/composables/services/useServices'
 
 interface UseJournalsOptions {
   userId: string
@@ -10,7 +9,7 @@ interface UseJournalsOptions {
 
 export function useJournals({ userId }: UseJournalsOptions) {
   const toast = useToast()
-  const db = useFirestore()
+  const services = useServices()
 
   const loading = ref(true)
   const journals = ref<Journal[]>([])
@@ -18,16 +17,15 @@ export function useJournals({ userId }: UseJournalsOptions) {
   async function getJournals() {
     try {
       if (!userId) return
+
       loading.value = true
 
-      const q = query(collection(db, 'journals'), where('userId', '==', userId))
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((doc) => {
-        const journal = doc.data() as Journal
-        journal.id = doc.id
+      const response = await services.journals.readAll(userId)
 
-        journals.value.push(journal)
-      })
+      if (response.value) {
+        journals.value = response.value
+        return
+      }
     } catch (error) {
       toast.add({
         severity: 'error',
@@ -43,7 +41,6 @@ export function useJournals({ userId }: UseJournalsOptions) {
 
   return {
     loading,
-    journals,
-    getJournals
+    journals
   }
 }

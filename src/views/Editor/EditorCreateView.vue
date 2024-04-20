@@ -2,8 +2,16 @@
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import EditorForm from '@/components/Editor/Form.vue'
 import { useJournalCreate } from '@/composables/journals/useJournalCreate'
+import { useCurrentUser } from 'vuefire'
 
-const { errors, loading: loadingCreate, journal, safeParse, createJournal } = useJournalCreate()
+const user = useCurrentUser()
+const {
+  errors,
+  loading: loadingCreate,
+  journal,
+  safeParse,
+  createJournal
+} = useJournalCreate({ userId: user.value?.uid! })
 
 async function handleCreate() {
   const isValid = safeParse().success

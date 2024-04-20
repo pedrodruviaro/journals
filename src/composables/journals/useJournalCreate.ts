@@ -1,22 +1,32 @@
-import type { Category } from '@/constants/category'
-import type { Journal } from '@/types'
-import { doc, updateDoc } from 'firebase/firestore'
+import { z } from 'zod'
 import { useToast } from 'primevue/usetoast'
-import { ref, watchEffect } from 'vue'
-import { useFirestore } from 'vuefire'
-import { z, type ZodFormattedError } from 'zod'
+import { useServices } from '@/composables/services/useServices'
+import { ref } from 'vue'
+import { Category } from '@/constants/category'
+import { useRouter } from 'vue-router'
+import type { Journal } from '@/types'
+import type { ZodFormattedError } from 'zod'
 
 const schema = z.object({
   title: z.string().min(4, 'Um título é obrigatório'),
   description: z.string().min(1, 'Uma descrição é obrigatória'),
-  category: z.string(),
+  category: z.nativeEnum(Category, {
+    errorMap: () => {
+      return { message: 'Defina uma categoria' }
+    }
+  }),
   content: z.string().min(1, 'Defina um conteúdo'),
   isPublic: z.boolean({ required_error: 'Defina o tipo do jornal' })
 })
 
-export function useJournalCreate() {
+interface UseJournalCreateOptions {
+  userId: string
+}
+
+export function useJournalCreate({ userId }: UseJournalCreateOptions) {
   const toast = useToast()
-  const db = useFirestore()
+  const services = useServices()
+  const router = useRouter()
 
   const loading = ref(false)
   const errors = ref<ZodFormattedError<Journal>>()
@@ -31,6 +41,8 @@ export function useJournalCreate() {
 
   function safeParse() {
     const result = schema.safeParse({ ...journal.value })
+    console.log(journal.value)
+    console.log(result)
 
     if (!result.success) {
       errors.value = result.error.format()
@@ -45,12 +57,14 @@ export function useJournalCreate() {
     try {
       loading.value = true
 
-      // criar
-      console.log(journal.value)
+      const response = await services.journals.create({ userId, journal })
+      if (response) {
+        router.push({ name: 'journals' })
+      }
 
       toast.add({
         severity: 'success',
-        detail: 'Jornal atualizado com sucesso',
+        detail: 'Jornal criado com sucesso!',
         life: 2000
       })
     } catch (error) {
