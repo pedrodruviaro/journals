@@ -1,7 +1,5 @@
 import LandingPageView from '@/views/LandinPage/LandingPgeView.vue'
-import AuthLoginView from '@/views/Auth/AuthLoginView.vue'
 import DashboardView from '@/views/Dashboard/DashboardView.vue'
-import AuthRedirectView from '@/views/Auth/AuthRedirectView.vue'
 import EditorView from '@/views/Editor/EditorView.vue'
 import EditorCreateView from '@/views/Editor/EditorCreateView.vue'
 import EditorEditView from '@/views/Editor/EditorEditView.vue'
@@ -25,12 +23,12 @@ const router = createRouter({
         {
           path: 'login',
           name: 'auth-login',
-          component: AuthLoginView
+          component: () => import('@/views/Auth/AuthLoginView.vue')
         },
         {
           path: 'redirect',
           name: 'auth-redirect',
-          component: AuthRedirectView
+          component: () => import('@/views/Auth/AuthRedirectView.vue')
         }
       ]
     },
@@ -64,6 +62,12 @@ const router = createRouter({
           component: EditorEditView
         }
       ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      props: (route) => ({ path: route.path }),
+      component: () => import('@/views/Error/NotFoundView.vue')
     }
   ]
 })
