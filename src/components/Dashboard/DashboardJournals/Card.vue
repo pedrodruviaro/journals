@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useJournalCreate } from '@/composables/journals/useJournalCreate'
 import type { Journal } from '@/types'
 import Card from 'primevue/card'
 import Chip from 'primevue/chip'
@@ -44,7 +45,8 @@ function handleEmitWantsToEditJournal() {
       <p>{{ props.journal.description }}</p>
     </template>
     <template #footer>
-      <div class="flex justify-end">
+      <div class="flex items-center flex-wrap gap-2 justify-end">
+        <Chip :label="journal.category" class="text-sm" />
         <Chip :label="journalDate" icon="pi pi-calendar-clock" class="text-sm" />
       </div>
     </template>
