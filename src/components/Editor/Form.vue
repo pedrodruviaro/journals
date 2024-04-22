@@ -3,13 +3,11 @@ import Button from 'primevue/button'
 import Dropdown from 'primevue/dropdown'
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
-import Tag from 'primevue/tag'
 import ToggleButton from 'primevue/togglebutton'
-import { marked } from 'marked'
+import Editor from 'primevue/editor'
 import { CATEGORY_VALUES } from '@/constants/category'
 import type { Journal } from '@/types'
 import type { ZodFormattedError } from 'zod'
-import { computed } from 'vue'
 
 const props = defineProps<{
   errors?: ZodFormattedError<Journal>
@@ -30,10 +28,6 @@ const journal = defineModel<Journal>('journal', {
 const emits = defineEmits<{
   (e: 'tried-to-submit'): void
 }>()
-
-const markdownContent = computed(() => {
-  return marked(journal.value.content)
-})
 </script>
 
 <template>
@@ -65,10 +59,8 @@ const markdownContent = computed(() => {
     </div>
 
     <div>
-      <Tag severity="secondary" value="Editor em markdown" class="mb-2" />
-      <div class="grid gap-2 md:grid-cols-2">
-        <Textarea v-model="journal.content" class="w-full min-h-96" />
-        <div class="w-full min-h-96 p-inputtext prose-sm lg:prose" v-html="markdownContent"></div>
+      <div class="grid gap-2">
+        <Editor v-model="journal.content" editorStyle="height: 320px" />
       </div>
       <small class="error-message" v-if="props.errors?.content">{{
         props.errors?.content._errors[0]
