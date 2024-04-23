@@ -5,6 +5,8 @@ import EditorFormLoader from '@/components/Editor/Loader.vue'
 import { useCurrentUser } from 'vuefire'
 import { useMyJournal } from '@/composables/journals/useMyJournal'
 import { useJournalUpdate } from '@/composables/journals/useJournalUpdate'
+import { useSeoTitle } from '@/composables/seo/useSeoTitle'
+import { watchEffect } from 'vue'
 
 const props = defineProps<{
   id: string
@@ -36,6 +38,12 @@ async function handleUpdate() {
 
   await updateJournal()
 }
+
+watchEffect(() => {
+  if (!loadingJournal.value && !error.value) {
+    useSeoTitle(journal.value?.title ?? 'Edite seu jornal')
+  }
+})
 </script>
 
 <template>

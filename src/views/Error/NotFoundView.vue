@@ -3,6 +3,9 @@ import BasePageWrapper from '@/components/Base/BasePageWrapper.vue'
 import Card from 'primevue/card'
 import Button from 'primevue/button'
 import { computed } from 'vue'
+import { useSeoTitle } from '@/composables/seo/useSeoTitle'
+
+useSeoTitle('Página não encontrada')
 
 const props = defineProps<{
   path: string

@@ -3,6 +3,9 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 import EditorForm from '@/components/Editor/Form.vue'
 import { useJournalCreate } from '@/composables/journals/useJournalCreate'
 import { useCurrentUser } from 'vuefire'
+import { useSeoTitle } from '@/composables/seo/useSeoTitle'
+
+useSeoTitle('Crie seu jornal')
 
 const user = useCurrentUser()
 const {

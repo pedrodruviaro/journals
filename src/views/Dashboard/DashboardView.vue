@@ -6,6 +6,7 @@ import DashboardJournalsGroup from '@/components/Dashboard/DashboardJournals/Gro
 import DashboardJournalsCard from '@/components/Dashboard/DashboardJournals/Card.vue'
 import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/Loader.vue'
 import DashboardButtonNewJournal from '@/components/Dashboard/DashboardButtonNewJournal.vue'
+import { useSeoTitle } from '@/composables/seo/useSeoTitle'
 import { useRouter } from 'vue-router'
 import { useJournals } from '@/composables/journals/useJournals'
 import { useCurrentUser } from 'vuefire'
@@ -13,6 +14,8 @@ import { ref } from 'vue'
 import { watchEffect } from 'vue'
 import type { Category } from '@/constants/category'
 import type { Journal } from '@/types'
+
+useSeoTitle('Dashboard')
 
 const user = useCurrentUser()
 const { loading, journals } = useJournals({ userId: user.value?.uid! })

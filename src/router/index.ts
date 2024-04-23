@@ -1,4 +1,4 @@
-import LandingPageView from '@/views/LandinPage/LandingPgeView.vue'
+import LandingPageView from '@/views/LandinPage/LandingPageView.vue'
 import DashboardView from '@/views/Dashboard/DashboardView.vue'
 import EditorView from '@/views/Editor/EditorView.vue'
 import EditorCreateView from '@/views/Editor/EditorCreateView.vue'

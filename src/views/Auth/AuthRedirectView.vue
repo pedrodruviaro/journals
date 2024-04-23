@@ -3,6 +3,9 @@ import BasePageWrapper from '@/components/Base/BasePageWrapper.vue'
 import AuthRedirect from '@/components/Auth/AuthRedirect.vue'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
+import { useSeoTitle } from '@/composables/seo/useSeoTitle'
+
+useSeoTitle('Redirecionando...')
 
 const router = useRouter()
 
