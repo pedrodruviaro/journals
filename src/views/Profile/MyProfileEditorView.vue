@@ -4,6 +4,9 @@ import EditorFormLoader from '@/components/Profile/EditorFormLoader.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import { useGetProfile } from '@/composables/profiles/useGetProfile'
 import { useCurrentUser } from 'vuefire'
+import { useSeoTitle } from '@/composables/seo/useSeoTitle'
+
+useSeoTitle('Meu perfil')
 
 const user = useCurrentUser()
 
