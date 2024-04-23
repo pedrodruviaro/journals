@@ -3,12 +3,15 @@ import { useFirebaseAuth } from 'vuefire'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
+import { useServices } from '@/composables/services/useServices'
 
 export function useAuthActions() {
   const provider = new GoogleAuthProvider()
+  provider.addScope('email')
   const auth = useFirebaseAuth()!
   const router = useRouter()
   const toast = useToast()
+  const services = useServices()
 
   const loading = ref(false)
 
@@ -20,6 +23,11 @@ export function useAuthActions() {
 
       if (!user.uid) {
         throw new Error('User cannot be loaded')
+      }
+
+      const exists = await services.profiles.checkIfUserExists(user.uid)
+      if (!exists) {
+        services.profiles.create(user)
       }
 
       router.push({ name: 'auth-redirect' })

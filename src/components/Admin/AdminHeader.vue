@@ -16,7 +16,7 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: 'wants-to-navigate-to-journals'): void
   (e: 'wants-to-create-journal'): void
-  (e: 'wants-to-see-public-profile'): void
+  (e: 'wants-to-navigate-to-profile'): void
   (e: 'wants-to-logout'): void
 }>()
 
@@ -28,9 +28,9 @@ const menuItems = ref<MenuItem[]>([
     command: () => emits('wants-to-create-journal')
   },
   {
-    label: 'Perfil Público',
+    label: 'Meu Perfil',
     icon: 'pi pi-user',
-    command: () => emits('wants-to-see-public-profile')
+    command: () => emits('wants-to-navigate-to-profile')
   }
 ])
 

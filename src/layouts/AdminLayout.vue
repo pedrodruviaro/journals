@@ -22,20 +22,20 @@ function handleNavigateToCreateJournal() {
   router.push({ name: 'editor-create' })
 }
 
-function handleNavigateToPublicProfile() {
-  router.push({ name: 'public-profile' })
+function handleNavigateToProfile() {
+  router.push({ name: 'my-profile' })
 }
 </script>
 
 <template>
-  <div>
+  <div v-if="user">
     <AdminHeader
       :loading="loading"
       :username="username"
       :avatar-url="user?.photoURL!"
       @wants-to-navigate-to-journals="handleNavigateToJournals"
       @wants-to-create-journal="handleNavigateToCreateJournal"
-      @wants-to-see-public-profile="handleNavigateToPublicProfile"
+      @wants-to-navigate-to-profile="handleNavigateToProfile"
       @wants-to-logout="logout"
     />
     <BasePageWrapper>
