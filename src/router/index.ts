@@ -14,7 +14,6 @@ const router = createRouter({
       name: 'landing-page',
       component: LandingPageView
     },
-
     {
       path: '/auth',
       name: 'auth',
@@ -32,7 +31,6 @@ const router = createRouter({
         }
       ]
     },
-
     {
       path: '/my-profile',
       name: 'my-profile',
@@ -41,7 +39,6 @@ const router = createRouter({
       },
       component: () => import('@/views/Profile/MyProfileEditorView.vue')
     },
-
     {
       path: '/journals',
       name: 'journals',
@@ -71,6 +68,12 @@ const router = createRouter({
           component: EditorEditView
         }
       ]
+    },
+    {
+      path: '/user/:id',
+      name: 'public-user',
+      props: true,
+      component: () => import('@/views/Profile/PublicProfileView.vue')
     },
     {
       path: '/:pathMatch(.*)*',

@@ -13,10 +13,12 @@ export type Journal = {
   id?: string
 }
 
-type UserPartial = Pick<User, 'photoURL' | 'email'>
+export type UserPartial = Pick<User, 'photoURL' | 'email'>
 
-export type UserProfile = UserPartial & {
+export type UserAditionalInfos = {
   bio?: string
   site?: string
   name: string
 }
+
+export type UserProfile = UserPartial & UserAditionalInfos

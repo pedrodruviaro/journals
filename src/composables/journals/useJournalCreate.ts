@@ -41,8 +41,6 @@ export function useJournalCreate({ userId }: UseJournalCreateOptions) {
 
   function safeParse() {
     const result = schema.safeParse({ ...journal.value })
-    console.log(journal.value)
-    console.log(result)
 
     if (!result.success) {
       errors.value = result.error.format()

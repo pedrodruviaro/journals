@@ -1,7 +1,12 @@
-import type { UserProfile } from '@/types'
+import type { UserAditionalInfos, UserProfile } from '@/types'
 import type { User } from 'firebase/auth'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import type { Firestore } from 'firebase/firestore'
+
+export interface UpdateProfileOptions {
+  userId: string
+  userInfos: UserAditionalInfos
+}
 
 export default (database: Firestore) => ({
   async create(user: User) {
@@ -30,5 +35,17 @@ export default (database: Firestore) => ({
     const profileDocSnap = await getDoc(profileDocRef)
 
     return profileDocSnap.exists()
+  },
+
+  async updateProfile({ userId, userInfos }: UpdateProfileOptions) {
+    const profileDocRef = doc(database, 'profiles', userId)
+
+    const response = await updateDoc(profileDocRef, {
+      site: userInfos.site ?? '',
+      bio: userInfos.bio ?? '',
+      name: userInfos.name
+    })
+
+    return response
   }
 })
