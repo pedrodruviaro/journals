@@ -6,5 +6,8 @@
 
 - lógica de redirect com base na query na página de login
 
-- composable useProfileEdit
-- criação do form e form loader na view de edição de perfil
+- componente de "sem jornals para exibir"
+
+- compartilhamento do perfil nas redes (vueuse)
+
+- refatorar card de jornal para aceitar prop (ou slot) de comandos (com base no perfil ser publico ou nao)
