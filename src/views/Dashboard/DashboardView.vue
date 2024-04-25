@@ -2,9 +2,9 @@
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import DasboardButtons from '@/components/Dashboard/DashboardButtons/Buttons.vue'
 import DasboardButtonsLoader from '@/components/Dashboard/DashboardButtons/Loader.vue'
-import DashboardJournalsGroup from '@/components/Dashboard/DashboardJournals/Group.vue'
-import DashboardJournalsCard from '@/components/Dashboard/DashboardJournals/Card.vue'
-import DashboardJournalsLoader from '@/components/Dashboard/DashboardJournals/Loader.vue'
+import JournalGroup from '@/components/Journal/Group.vue'
+import JournalCard from '@/components/Journal/Card.vue'
+import JournalLoader from '@/components/Journal/Loader.vue'
 import DashboardButtonNewJournal from '@/components/Dashboard/DashboardButtonNewJournal.vue'
 import { useSeoTitle } from '@/composables/seo/useSeoTitle'
 import { useRouter } from 'vue-router'
@@ -61,39 +61,21 @@ watchEffect(() => {
           />
         </DasboardButtonsLoader>
 
-        <DashboardJournalsLoader :loading="loading">
-          <DashboardJournalsGroup>
+        <JournalLoader :loading="loading">
+          <JournalGroup>
             <TransitionGroup name="journals">
-              <DashboardJournalsCard
+              <JournalCard
                 v-for="journal in filteredJournals"
                 :key="journal.id"
                 :journal="journal"
                 @wants-to-edit-journal="handleWantsToEdit"
               />
             </TransitionGroup>
-          </DashboardJournalsGroup>
-        </DashboardJournalsLoader>
+          </JournalGroup>
+        </JournalLoader>
       </div>
 
       <DashboardButtonNewJournal @wants-to-create-new-journal="handleWantsCreateNewJournal" />
     </section>
   </AdminLayout>
 </template>
-
-<style scoped>
-.journals-move,
-.journals-enter-active,
-.journals-leave-active {
-  transition: all 0.5s ease;
-}
-
-.journals-enter-from,
-.journals-leave-to {
-  opacity: 0;
-  transform: translateX(20px);
-}
-
-.journals-leave-active {
-  position: absolute;
-}
-</style>

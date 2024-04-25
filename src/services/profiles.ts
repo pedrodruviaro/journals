@@ -1,3 +1,4 @@
+import { useServices } from '@/composables/services/useServices'
 import type { UserAditionalInfos, UserProfile } from '@/types'
 import type { User } from 'firebase/auth'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
@@ -47,5 +48,19 @@ export default (database: Firestore) => ({
     })
 
     return response
+  },
+
+  async getPublicProfile(userId: string) {
+    const services = useServices()
+
+    const profile = this.getProfile(userId)
+    const journals = services.journals.readAllPublic(userId)
+
+    const response = await Promise.all([profile, journals])
+
+    return {
+      profile: response[0],
+      journals: response[1]
+    }
   }
 })

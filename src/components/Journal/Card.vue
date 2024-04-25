@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useJournalCreate } from '@/composables/journals/useJournalCreate'
 import type { Journal } from '@/types'
 import Card from 'primevue/card'
 import Chip from 'primevue/chip'
@@ -18,10 +17,12 @@ const journalDate = computed(() => {
 
 const emits = defineEmits<{
   (e: 'wants-to-edit-journal', id: string): void
+  (e: 'wants-to-see-journal', id: string): void
 }>()
 
-function handleEmitWantsToEditJournal() {
+function handleEmits() {
   emits('wants-to-edit-journal', props.journal.id!)
+  emits('wants-to-see-journal', props.journal.id!)
 }
 </script>
 
@@ -29,8 +30,8 @@ function handleEmitWantsToEditJournal() {
   <Card
     class="cursor-pointer hover:bg-[#020617] hover:text-white focus:bg-[#020617] focus:text-white transition-all"
     tabindex="0"
-    @keyup.enter="handleEmitWantsToEditJournal"
-    @click="handleEmitWantsToEditJournal"
+    @keyup.enter="handleEmits"
+    @click="handleEmits"
   >
     <template #title>
       <div class="grid gap-4 md:flex md:items-center md:justify-between">

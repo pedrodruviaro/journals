@@ -28,6 +28,19 @@ export interface CreateOptions {
 }
 
 export default (database: Firestore) => ({
+  async readOne({ journalId, userId }: ReadOneOptions): Promise<Journal | undefined> {
+    const docRef = doc(database, 'journals', journalId)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      const doc = docSnap.data() as Journal
+      if (doc.userId !== userId) {
+        return undefined
+      }
+      return doc
+    }
+  },
+
   async readAll(userId: string) {
     const response = ref<Journal[]>([])
 
@@ -38,6 +51,25 @@ export default (database: Firestore) => ({
 
       journal.id = doc.id
       response.value.push(journal)
+    })
+
+    return response
+  },
+
+  async readAllPublic(userId: string) {
+    const response: Journal[] = []
+
+    const q = query(
+      collection(database, 'journals'),
+      where('userId', '==', userId),
+      where('isPublic', '==', true)
+    )
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      const journal = doc.data() as Journal
+
+      journal.id = doc.id
+      response.push(journal)
     })
 
     return response
@@ -54,19 +86,6 @@ export default (database: Firestore) => ({
     await updateDoc(docRef, { ...journalData, updatedAt: new Date().toISOString() })
 
     return { id }
-  },
-
-  async readOne({ journalId, userId }: ReadOneOptions): Promise<Journal | undefined> {
-    const docRef = doc(database, 'journals', journalId)
-    const docSnap = await getDoc(docRef)
-
-    if (docSnap.exists()) {
-      const doc = docSnap.data() as Journal
-      if (doc.userId !== userId) {
-        return undefined
-      }
-      return doc
-    }
   },
 
   async create({ journal, userId }: CreateOptions) {

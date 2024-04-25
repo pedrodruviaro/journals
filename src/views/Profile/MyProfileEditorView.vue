@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import EditForm from '@/components/Profile/EditForm.vue'
-import EditorFormLoader from '@/components/Profile/EditorFormLoader.vue'
+import EditorForm from '@/components/Profile/Editor/Editor.vue'
+import EditorFormLoader from '@/components/Profile/Editor/Loader.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
-import Headline from '@/components/Profile/Headline.vue'
-import HeadlineLoader from '@/components/Profile/HeadlineLoader.vue'
+import Headline from '@/components/Profile/Headline/Headline.vue'
+import HeadlineLoader from '@/components/Profile/Headline/Loader.vue'
 import { useGetProfile } from '@/composables/profiles/useGetProfile'
 import { useCurrentUser } from 'vuefire'
 import { useSeoTitle } from '@/composables/seo/useSeoTitle'
@@ -44,7 +44,8 @@ watchEffect(() => {
 
 const router = useRouter()
 function handleNavigateToPublicProfile() {
-  router.push({ name: 'public-user', params: { id: user.value?.uid! } })
+  const routeData = router.resolve({ name: 'public-user', params: { id: user.value?.uid! } })
+  window.open(routeData.href, '_blank')
 }
 </script>
 
@@ -67,7 +68,7 @@ function handleNavigateToPublicProfile() {
       <Card>
         <template #content>
           <EditorFormLoader :loading="loadingProfile">
-            <EditForm
+            <EditorForm
               :profile="userInfos"
               :loading="loadingEditProfile"
               :errors="errors"
