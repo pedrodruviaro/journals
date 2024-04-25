@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Card from 'primevue/card'
 import EditorForm from '@/components/Profile/Editor/Editor.vue'
 import EditorFormLoader from '@/components/Profile/Editor/Loader.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
@@ -8,7 +9,6 @@ import { useGetProfile } from '@/composables/profiles/useGetProfile'
 import { useCurrentUser } from 'vuefire'
 import { useSeoTitle } from '@/composables/seo/useSeoTitle'
 import { useEditProfile } from '@/composables/profiles/useEditProfile'
-import Card from 'primevue/card'
 import { watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 

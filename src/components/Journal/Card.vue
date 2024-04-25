@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Journal } from '@/types'
 import Card from 'primevue/card'
 import Chip from 'primevue/chip'
 import { computed } from 'vue'
+import type { Journal } from '@/types'
 
 const props = defineProps<{
   journal: Journal

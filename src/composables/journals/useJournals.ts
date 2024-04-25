@@ -1,7 +1,7 @@
 import { onMounted, ref } from 'vue'
-import type { Journal } from '@/types'
 import { useToast } from 'primevue/usetoast'
 import { useServices } from '@/composables/services/useServices'
+import type { Journal } from '@/types'
 
 interface UseJournalsOptions {
   userId: string

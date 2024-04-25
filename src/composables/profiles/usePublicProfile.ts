@@ -1,4 +1,4 @@
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useServices } from '@/composables/services/useServices'
 import type { Journal, UserProfile } from '@/types'
 

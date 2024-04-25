@@ -1,9 +1,9 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { useFirebaseAuth } from 'vuefire'
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import { useServices } from '@/composables/services/useServices'
+import { ref } from 'vue'
 
 export function useAuthActions() {
   const provider = new GoogleAuthProvider()

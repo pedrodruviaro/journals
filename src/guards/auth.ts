@@ -1,5 +1,5 @@
-import type { RouteLocationNormalized } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
+import type { RouteLocationNormalized } from 'vue-router'
 
 export async function authGuard(to: RouteLocationNormalized) {
   if (to.meta.needsAuth) {

@@ -1,7 +1,7 @@
 import { useServices } from '@/composables/services/useServices'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import type { UserAditionalInfos, UserProfile } from '@/types'
 import type { User } from 'firebase/auth'
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import type { Firestore } from 'firebase/firestore'
 
 export interface UpdateProfileOptions {

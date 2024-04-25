@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { UserAditionalInfos } from '@/types'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import type { ZodFormattedError } from 'zod'
+import type { UserAditionalInfos } from '@/types'
 
 const props = defineProps<{
   errors?: ZodFormattedError<UserAditionalInfos>
