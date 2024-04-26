@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BasePageWrapper from '@/components/Base/BasePageWrapper.vue'
-import BaseLogo from '@/components/Base/BaseLogo.vue'
 import PublicHeadline from '@/components/Profile/PublicHeadline/PublicHeadline.vue'
 import PublicHeadlineLoader from '@/components/Profile/PublicHeadline/Loader.vue'
 import JournalGroup from '@/components/Journal/Group.vue'
@@ -51,9 +50,6 @@ function handleWantsToSeeJournal(id: string) {
 
 <template>
   <BasePageWrapper>
-    <div class="mb-10 grid place-items-center">
-      <BaseLogo />
-    </div>
     <div class="grid gap-4">
       <PublicHeadlineLoader :loading="loading">
         <PublicHeadline
@@ -61,6 +57,7 @@ function handleWantsToSeeJournal(id: string) {
           :bio="profile.bio"
           :name="profile.name"
           :avatar-url="profile.photoURL!"
+          :site="profile.site"
         />
       </PublicHeadlineLoader>
 

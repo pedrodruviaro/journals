@@ -93,15 +93,3 @@ const emits = defineEmits<{
     </div>
   </div>
 </template>
-
-<style>
-.ql-image {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-.error-message {
-  @apply text-red-500 text-base;
-}
-</style>
